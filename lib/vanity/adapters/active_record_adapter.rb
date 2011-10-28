@@ -121,6 +121,7 @@ module Vanity
       def metric_values(metric, from, to)
         connection = VanityMetric.connection
         record = VanityMetric.retrieve(metric)
+        record.metric_id.cosntantize.
         dates = (from.to_date..to.to_date).map(&:to_s)
         conditions = [connection.quote_column_name('date') + ' IN (?)', dates]
         order = "#{connection.quote_column_name('date')}"
@@ -133,6 +134,8 @@ module Vanity
                 :order => order,
                 :group => group_by
         )
+
+        values = metric.values(from,to)
 
         dates.map do |date|
           value = values.detect{|v| v.date == date }
