@@ -134,8 +134,6 @@ module Vanity
                 :group => group_by
         )
 
-        #values = metric.values(from, to)
-
         dates.map do |date|
           value = values.detect{|v| v.date == date }
           [(value && value.value) || 0]
